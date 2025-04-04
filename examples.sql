@@ -11,3 +11,17 @@ delimiter //
  end //
    
  select empno,ename,sal,calBonus3(empno) from emp;
+------------------------------------------------------------------------------------------------------------------------------------------------
+create function getdays3(pempid int)returns int
+ begin
+ declare vhiredate date;
+ declare vday int;
+ select hiredate into vhiredate from emp 
+ where empno=pempid;
+ set vday=TIMESTAMPDIFF(DAY, vhiredate, CURDATE());
+ return vday;
+ end //
+   
+ select empno,ename,getdays3(empno) from emp //
+------------------------------------------------------------------------------------------------------------------------------------------------
+
